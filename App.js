@@ -1,80 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
+import Icons from 'react-native-vector-icons/AntDesign';
 
 export default function App() {
   const [User, setUser] = useState([]);
-  // const User = [
-  //   {
-  //     id: 3660,
-  //     name: 'Dinesh Pilla',
-  //     email: 'dinesh_pilla@altenwerth.co',
-  //     gender: 'male',
-  //     status: 'active',
-  //   },
-  //   {
-  //     id: 3659,
-  //     name: 'Atreyee Khatri',
-  //     email: 'khatri_atreyee@jacobson.co',
-  //     gender: 'female',
-  //     status: 'inactive',
-  //   },
-  //   {
-  //     id: 3658,
-  //     name: 'Chandraprabha Shah',
-  //     email: 'chandraprabha_shah@schultz-barton.com',
-  //     gender: 'female',
-  //     status: 'active',
-  //   },
-  //   {
-  //     id: 3657,
-  //     name: 'Atreyi Somayaji',
-  //     email: 'somayaji_atreyi@mayert.info',
-  //     gender: 'male',
-  //     status: 'active',
-  //   },
-  //   {
-  //     id: 3656,
-  //     name: 'Baidehi Bharadwaj Ret.',
-  //     email: 'ret_bharadwaj_baidehi@reilly-watsica.net',
-  //     gender: 'female',
-  //     status: 'inactive',
-  //   },
-  //   {
-  //     id: 3655,
-  //     name: 'Girindra Chaturvedi LLD',
-  //     email: 'lld_girindra_chaturvedi@feeney.net',
-  //     gender: 'male',
-  //     status: 'inactive',
-  //   },
-  //   {
-  //     id: 3654,
-  //     name: 'Girika Kapoor Jr.',
-  //     email: 'jr_girika_kapoor@batz.info',
-  //     gender: 'male',
-  //     status: 'active',
-  //   },
-  //   {
-  //     id: 3653,
-  //     name: 'Meghnath Dwivedi',
-  //     email: 'dwivedi_meghnath@sanford-bernier.net',
-  //     gender: 'female',
-  //     status: 'active',
-  //   },
-  //   {
-  //     id: 3652,
-  //     name: 'Gaurang Iyengar',
-  //     email: 'gaurang_iyengar@toy.biz',
-  //     gender: 'female',
-  //     status: 'inactive',
-  //   },
-  //   {
-  //     id: 3651,
-  //     name: 'Mrs. Jitender Varma',
-  //     email: 'mrs_jitender_varma@cormier.name',
-  //     gender: 'male',
-  //     status: 'inactive',
-  //   },
-  // ];
+
   useEffect(() => {
     fetch('https://gorest.co.in/public/v2/users')
       .then(res => res.json())
@@ -112,12 +42,34 @@ export default function App() {
   // }, []);
   const oneUser = ({item}) => {
     return (
-      <View>
-        <Text>{item.id}</Text>
-        <Text>{item.name}</Text>
-        <Text>{item.email}</Text>
-        <Text>{item.gender}</Text>
-        <Text>{item.status}</Text>
+      <View style={styles.user}>
+        <View style={styles.userContainer}>
+          <Icons style={styles.icon} name="idcard" size={30} color="#900" />
+
+          <Text style={styles.text}>{item.id}</Text>
+        </View>
+        <View style={styles.userContainer}>
+          <Icons style={styles.icon} name="user" size={30} color="#900" />
+          <Text style={styles.text}>{item.name}</Text>
+        </View>
+        <View style={styles.userContainer}>
+          <Icons style={styles.icon} name="mail" size={30} color="#900" />
+          <Text style={styles.text}>{item.email}</Text>
+        </View>
+
+        <View style={styles.userContainer}>
+          <Icons style={styles.icon} name="man" size={30} color="#900" />
+          <Text style={styles.text}>{item.gender}</Text>
+        </View>
+        <View style={styles.userContainer}>
+          <Icons
+            style={styles.icon}
+            name="checksquareo"
+            size={30}
+            color="#900"
+          />
+          <Text style={styles.text}>{item.status}</Text>
+        </View>
       </View>
     );
   };
@@ -143,5 +95,22 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  userContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  user: {
+    borderWidth: 1,
+    borderColor: '#f0f8ff',
+    marginTop: 20,
+  },
+  text: {
+    justifyContent: 'center',
+    marginLeft: 20,
+    // color: 'black',
+  },
+  icon: {
+    marginLeft: 5,
   },
 });
