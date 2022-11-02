@@ -4,6 +4,15 @@ import Icons from 'react-native-vector-icons/AntDesign';
 
 export default function App() {
   const [User, setUser] = useState([]);
+  // function Data(props) {
+  //   return {
+  //     name: props.name,
+  //     email: props.email,
+  //     gender: props.gender == 'male' ? 'man' : 'woman',
+  //     status: props.status,
+  //   };
+  // }
+  // var DATA = User.map(Data());
 
   useEffect(() => {
     fetch('https://gorest.co.in/public/v2/users')
@@ -40,41 +49,36 @@ export default function App() {
   //       console.log(res);
   //     });
   // }, []);
-  const oneUser = ({item}) => {
+
+  function oneUser({item}) {
     return (
       <View style={styles.user}>
         <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="idcard" size={30} color="#900" />
-
+          <Icons style={styles.icon} name="idcard" size={30} />
           <Text style={styles.text}>{item.id}</Text>
         </View>
         <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="user" size={30} color="#900" />
+          <Icons style={styles.icon} name="user" size={30} />
           <Text style={styles.text}>{item.name}</Text>
         </View>
         <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="mail" size={30} color="#900" />
+          <Icons style={styles.icon} name="mail" size={30} />
           <Text style={styles.text}>{item.email}</Text>
         </View>
 
         <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="man" size={30} color="#900" />
+          <Icons style={styles.icon} name="man" size={30} />
           <Text style={styles.text}>{item.gender}</Text>
         </View>
         <View style={styles.userContainer}>
-          <Icons
-            style={styles.icon}
-            name="checksquareo"
-            size={30}
-            color="#900"
-          />
+          <Icons style={styles.icon} name="checksquareo" size={30} />
           <Text style={styles.text}>{item.status}</Text>
         </View>
       </View>
     );
-  };
+  }
   const headerComponent = () => {
-    return <Text>User</Text>;
+    return <Text style={styles.conten}>User</Text>;
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -92,10 +96,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
+    backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   userContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -107,10 +112,19 @@ const styles = StyleSheet.create({
   },
   text: {
     justifyContent: 'center',
-    marginLeft: 20,
-    // color: 'black',
+    marginHorizontal: 10,
+    marginVertical: 5,
+    color: '#ffefd5',
   },
   icon: {
     marginLeft: 5,
+    marginVertical: 2,
+    color: '#ff6347',
+  },
+  conten: {
+    textAlign: 'center',
+    fontSize: 30,
+    marginVertical: 10,
+    color: '#ffa07a',
   },
 });
