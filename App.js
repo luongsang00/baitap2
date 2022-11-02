@@ -4,15 +4,19 @@ import Icons from 'react-native-vector-icons/AntDesign';
 
 export default function App() {
   const [User, setUser] = useState([]);
-  // function Data(props) {
-  //   return {
-  //     name: props.name,
-  //     email: props.email,
-  //     gender: props.gender == 'male' ? 'man' : 'woman',
-  //     status: props.status,
-  //   };
-  // }
-  // var DATA = User.map(Data());
+  function Data(props) {
+    // return props;
+    return {
+      id: props.id,
+      name: props.name,
+      email: props.email,
+      gender: props.gender,
+      status: props.status,
+      n: props.gender == 'male' ? 'man' : 'woman',
+      m: props.status == 'active' ? 'checksquareo' : 'closecircleo',
+    };
+  }
+  var DATA = User.map(Data);
 
   useEffect(() => {
     fetch('https://gorest.co.in/public/v2/users')
@@ -67,11 +71,11 @@ export default function App() {
         </View>
 
         <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="man" size={30} />
+          <Icons style={styles.icon} name={item.n} size={30} />
           <Text style={styles.text}>{item.gender}</Text>
         </View>
         <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="checksquareo" size={30} />
+          <Icons style={styles.icon} name={item.m} size={30} />
           <Text style={styles.text}>{item.status}</Text>
         </View>
       </View>
@@ -84,7 +88,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <FlatList
         ListHeaderComponent={headerComponent}
-        data={User}
+        data={DATA}
         renderItem={oneUser}
         ListEmptyComponent={<Text>Danh sách rỗng</Text>}
       />
