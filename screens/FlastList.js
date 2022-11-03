@@ -1,40 +1,23 @@
 import * as React from 'react';
 import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
 import Icons from 'react-native-vector-icons/AntDesign';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useEffect, useState} from 'react';
-
-const status = {active: 'checksquareo'};
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-function FlatLists() {
+const status = {active: 'checksquareo', inactive: 'closecircleo'};
+const gender = {male: 'man', female: 'woman'};
+const FlastList = () => {
   const [User, setUser] = useState([]);
-  function Data(props) {
-    // return props;
-    return {
-      id: props.id,
-      name: props.name,
-      email: props.email,
-      gender: props.gender,
-      status: props.status,
-      n: props.gender === 'male' ? 'man' : 'woman',
-      m: props.status === 'active' ? 'checksquareo' : 'closecircleo',
-    };
-  }
+  //   function Data(props) {
+  //     // return props;
+  //     return {
+  //       id: props.id,
+  //       name: props.name,
+  //       email: props.email,
+  //       gender: props.gender,
+  //       status: props.status,
+  //       n: props.gender === 'male' ? 'man' : 'woman',
+  //       m: props.status === 'active' ? 'checksquareo' : 'closecircleo',
+  //     };
+  //   }
   // var DATA = User.map(Data);
 
   useEffect(() => {
@@ -42,7 +25,8 @@ function FlatLists() {
       .then(res => res.json())
       .then(user => {
         // const User = res.json();
-        setUser(user.map(Data));
+        // setUser(user.map(Data));
+        setUser(user);
       });
   }, []);
 
@@ -90,11 +74,11 @@ function FlatLists() {
         </View>
 
         <View style={styles.userContainer}>
-          <Icons style={styles.icon} name={status[item.status]} size={30} />
+          <Icons style={styles.icon} name={gender[item.gender]} size={30} />
           <Text style={styles.text}>{item.gender}</Text>
         </View>
         <View style={styles.userContainer}>
-          <Icons style={styles.icon} name={item.m} size={30} />
+          <Icons style={styles.icon} name={status[item.status]} size={30} />
           <Text style={styles.text}>{item.status}</Text>
         </View>
       </View>
@@ -114,30 +98,9 @@ function FlatLists() {
       {/* <Icon name="rocket" size={30} color="#900" />; */}
     </SafeAreaView>
   );
-}
+};
 
-const Tab = createBottomTabNavigator();
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-        <Tab.Screen name="Floatlist" component={FlatLists} />
-      </Tab.Navigator>
-    </NavigationContainer>
-    // // <SafeAreaView style={styles.container}>
-    // //   <FlatList
-    // //     ListHeaderComponent={headerComponent}
-    // //     data={DATA}
-    // //     renderItem={oneUser}
-    // //     ListEmptyComponent={<Text>Danh sách rỗng</Text>}
-    // //   />
-    //   {/* <Icon name="rocket" size={30} color="#900" />; */}
-    // </SafeAreaView>
-  );
-}
-
+export default FlastList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
