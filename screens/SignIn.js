@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  StyleSheet,
+} from 'react-native';
 
 const SignIn = () => {
   return (
@@ -22,13 +28,18 @@ const SignIn = () => {
           Sign in
         </Text>
       </View>
-      <View style={{backgroundColor: '#f5f5dc', flex: 60}}>
+      <View style={{flex: 60}}>
         <View
           style={{
             marginVertical: 10,
           }}>
           <Text style={styles.text}>Your email</Text>
-          <TextInput placeholder="example@gmail.com" style={styles.input} />
+
+          <TextInput
+            placeholderTextColor={'#a9a9a9'}
+            placeholder="example@gmail.com"
+            style={styles.input}
+          />
         </View>
         <View
           style={{
@@ -36,24 +47,17 @@ const SignIn = () => {
           }}>
           <Text style={styles.text}>Your password</Text>
           <TextInput
+            placeholderTextColor={'#a9a9a9'}
             placeholder="********"
             style={styles.input}
             keyboardType="visible-password"
-            
           />
         </View>
-        <View
-          style={{
-            // width: '50%',
-            // alignItems: 'center',
-            // alignSelf: 'center',
-            // backgroundColor: '#ff8c00',
-            paddingHorizontal: '30%',
-            borderRadius: 10,
-            marginTop: 10,
-            marginBottom: 30,
-          }}>
-          <Button title="Sign In" color={'#0000ff'} borderRadius={'10'} />
+        <View style={styles.midToch}>
+          <TouchableHighlight style={styles.toch}>
+            <Text style={styles.textRegister}>Register</Text>
+          </TouchableHighlight>
+          {/* <Button title="Register" color={'#0000ff'} borderRadius={'10'} /> */}
         </View>
         <View
           style={{
@@ -64,7 +68,7 @@ const SignIn = () => {
       </View>
       <View
         style={{
-          backgroundColor: '#8a2be2',
+          // backgroundColor: '#8a2be2',
           flex: 10,
           alignItems: 'center',
         }}></View>
@@ -75,6 +79,7 @@ const SignIn = () => {
 export default SignIn;
 const styles = StyleSheet.create({
   text: {
+    color: '#a9a9a9',
     marginVertical: 10,
     marginLeft: 10,
   },
@@ -88,5 +93,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
     fontSize: 12,
+    color: '#a9a9a9',
+  },
+  midToch: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  toch: {
+    height: 40,
+    borderRadius: 10,
+    width: '40%',
+    backgroundColor: '#0000ff',
+    justifyContent: 'center',
+  },
+  textRegister: {
+    textAlign: 'center',
+    fontSize: 20,
   },
 });

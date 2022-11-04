@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 const status = {active: 'checksquareo', inactive: 'closecircleo'};
 const gender = {male: 'man', female: 'woman'};
 const FlastList = () => {
-  const [User, setUser] = useState([]);
+  const [users, setUser] = useState([]);
   //   function Data(props) {
   //     // return props;
   //     return {
@@ -24,7 +24,7 @@ const FlastList = () => {
     fetch('https://gorest.co.in/public/v2/users')
       .then(res => res.json())
       .then(user => {
-        // const User = res.json();
+        // console.log(user);
         // setUser(user.map(Data));
         setUser(user);
       });
@@ -91,7 +91,7 @@ const FlastList = () => {
     <SafeAreaView style={styles.container}>
       <FlatList
         ListHeaderComponent={headerComponent}
-        data={User}
+        data={users}
         renderItem={oneUser}
         ListEmptyComponent={<Text>Danh sách rỗng</Text>}
       />

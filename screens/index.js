@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import FlastList from './FlastList';
+import AnBum from './AnBum';
 const Tab = createBottomTabNavigator();
 const index = () => {
   return (
@@ -14,9 +15,10 @@ const index = () => {
 
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen name="AnBum" component={AnBum} />
+        <Tab.Screen name="Floatlist" component={FlastList} />
         <Tab.Screen name="SignIn" component={SignIn} />
         <Tab.Screen name="SignUp" component={SignUp} />
-        <Tab.Screen name="Floatlist" component={FlastList} />
       </Tab.Navigator>
     </NavigationContainer>
   );
