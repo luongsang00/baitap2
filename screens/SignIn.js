@@ -1,4 +1,6 @@
-import React from 'react';
+import * as React from 'react';
+import {useState} from 'react';
+// const AuthContext = React.createContext();
 import {
   View,
   Text,
@@ -6,8 +8,11 @@ import {
   TouchableHighlight,
   StyleSheet,
 } from 'react-native';
-
 const SignIn = () => {
+  // const [users, setUser] = useState([]);
+  const [emails, setEmail] = useState('');
+  const [passwords, setPassword] = useState('');
+  // const {signIn} = React.useContext(AuthContext);
   return (
     <View style={{flex: 1}}>
       <View
@@ -38,6 +43,9 @@ const SignIn = () => {
           <TextInput
             placeholderTextColor={'#a9a9a9'}
             placeholder="example@gmail.com"
+            keyboardType="email-address"
+            value={emails}
+            onChangeText={setEmail}
             style={styles.input}
           />
         </View>
@@ -49,13 +57,19 @@ const SignIn = () => {
           <TextInput
             placeholderTextColor={'#a9a9a9'}
             placeholder="********"
+            value={passwords}
+            onChangeText={setPassword}
             style={styles.input}
-            keyboardType="visible-password"
+            keyboardType="numbers-and-punctuation"
+            secureTextEntry
           />
         </View>
         <View style={styles.midToch}>
-          <TouchableHighlight style={styles.toch}>
-            <Text style={styles.textRegister}>Register</Text>
+          <TouchableHighlight
+            style={styles.toch}
+            // onPress={() => signIn({emails, passwords})}
+            onPress={() => alert(emails + passwords)}>
+            <Text style={styles.textRegister}>SignIn</Text>
           </TouchableHighlight>
           {/* <Button title="Register" color={'#0000ff'} borderRadius={'10'} /> */}
         </View>
@@ -88,6 +102,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderWidth: 1,
     borderColor: '#ff7f50',
+    color: '#000000',
   },
   textbotom: {
     textAlign: 'center',

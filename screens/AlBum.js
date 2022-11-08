@@ -9,18 +9,30 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const AnBum = () => {
+const AlBum = () => {
   const [photos, setPhotos] = useState([]);
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/photos')
       .then(res => res.json())
       .then(photo => {
-        console.log(photo);
+        // console.log(photo);
         // photo.json();
         // setUser(user.map(Data));
         setPhotos(photo);
       });
   }, []);
+  // function onePhoto1({photo}) {
+  //   return (
+  //     <View>
+  //       <Image
+  //         style={{backgroundColor: '#ff7f50', width: 40, height: 40}}
+  //         source={{
+  //           uri: item.url,
+  //         }}
+  //       />
+  //     </View>
+  //   );
+  // }
   function onePhoto({item}) {
     return (
       <View>
@@ -38,12 +50,11 @@ const AnBum = () => {
 
   return (
     <SafeAreaView>
+      {/* <FlatList data={photos} renderItem={onePhoto1} /> */}
       <FlatList
         data={photos}
         renderItem={onePhoto}
-        keyExtractor={item => {
-          item.id;
-        }}
+        keyExtractor={item => item.id}
         ListEmptyComponent={<Text>Danh sách rỗng</Text>}
       />
     </SafeAreaView>
@@ -54,4 +65,4 @@ const AnBum = () => {
   );
 };
 
-export default AnBum;
+export default AlBum;

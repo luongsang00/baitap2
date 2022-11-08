@@ -4,137 +4,103 @@ import Icons from 'react-native-vector-icons/AntDesign';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useEffect, useState} from 'react';
+import {SignIn, SignUp, FlastList, AlBum} from './screens';
+const AuthContext = React.createContext();
 
-const status = {active: 'checksquareo'};
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-function FlatLists() {
-  const [User, setUser] = useState([]);
-  function Data(props) {
-    // return props;
-    return {
-      id: props.id,
-      name: props.name,
-      email: props.email,
-      gender: props.gender,
-      status: props.status,
-      n: props.gender === 'male' ? 'man' : 'woman',
-      m: props.status === 'active' ? 'checksquareo' : 'closecircleo',
-    };
-  }
-  // var DATA = User.map(Data);
-
-  useEffect(() => {
-    fetch('https://gorest.co.in/public/v2/users')
-      .then(res => res.json())
-      .then(user => {
-        // const User = res.json();
-        setUser(user.map(Data));
-      });
-  }, []);
-
-  // useEffect(() => {
-  //   const endpoint = 'https://countries.trevorblades.com/graphql';
-  //   const headers = {
-  //     'content-type': 'application/json',
-  //   };
-  //   const graphqlQuery = {
-  //     query: `query{
-  //       country(code:"BR"){
-  //         code
-  //         native
-  //       }
-  //     }`,
-  //     variables: {},
-  //   };
-
-  //   const options = {
-  //     method: 'POST',
-  //     headers: headers,
-  //     body: JSON.stringify(graphqlQuery),
-  //   };
-  //   fetch(endpoint, options)
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       console.log(res);
-  //     });
-  // }, []);
-
-  function oneUser({item}) {
-    return (
-      <View style={styles.user}>
-        <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="idcard" size={30} />
-          <Text style={styles.text}>{item.id}</Text>
-        </View>
-        <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="user" size={30} />
-          <Text style={styles.text}>{item.name}</Text>
-        </View>
-        <View style={styles.userContainer}>
-          <Icons style={styles.icon} name="mail" size={30} />
-          <Text style={styles.text}>{item.email}</Text>
-        </View>
-
-        <View style={styles.userContainer}>
-          <Icons style={styles.icon} name={status[item.status]} size={30} />
-          <Text style={styles.text}>{item.gender}</Text>
-        </View>
-        <View style={styles.userContainer}>
-          <Icons style={styles.icon} name={item.m} size={30} />
-          <Text style={styles.text}>{item.status}</Text>
-        </View>
-      </View>
-    );
-  }
-  const headerComponent = () => {
-    return <Text style={styles.conten}>User</Text>;
-  };
-  return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        ListHeaderComponent={headerComponent}
-        data={User}
-        renderItem={oneUser}
-        ListEmptyComponent={<Text>Danh sách rỗng</Text>}
-      />
-      {/* <Icon name="rocket" size={30} color="#900" />; */}
-    </SafeAreaView>
-  );
-}
+// const status = {active: 'checksquareo'};
 
 const Tab = createBottomTabNavigator();
 export default function App() {
+  // const [state, dispatch] = React.useReducer(
+  //   (prevState, action) => {
+  //     switch (action.type) {
+  //       case 'RESTORE_TOKEN':
+  //         return {
+  //           ...prevState,
+  //           userToken: action.token,
+  //           isLoading: false,
+  //         };
+  //       case 'SIGN_IN':
+  //         return {
+  //           ...prevState,
+  //           isSignout: false,
+  //           userToken: action.token,
+  //         };
+  //       case 'SIGN_OUT':
+  //         return {
+  //           ...prevState,
+  //           isSignout: true,
+  //           userToken: null,
+  //         };
+  //     }
+  //   },
+  //   {
+  //     isLoading: true,
+  //     isSignout: false,
+  //     userToken: null,
+  //   },
+  // );
+  // React.useEffect(() => {
+  //   // Fetch the token from storage then navigate to our appropriate place
+  //   const bootstrapAsync = async () => {
+  //     let userToken;
+
+  //     try {
+  //       userToken = await SecureStore.getItemAsync('userToken');
+  //     } catch (e) {
+  //       // Restoring token failed
+  //     }
+
+  //     // After restoring token, we may need to validate it in production apps
+
+  //     // This will switch to the App screen or Auth screen and this loading
+  //     // screen will be unmounted and thrown away.
+  //     dispatch({type: 'RESTORE_TOKEN', token: userToken});
+  //   };
+
+  //   bootstrapAsync();
+  // }, []);
+
+  // const authContext = React.useMemo(
+  //   () => ({
+  //     signIn: async data => {
+  //       // In a production app, we need to send some data (usually username, password) to server and get a token
+  //       // We will also need to handle errors if sign in failed
+  //       // After getting token, we need to persist the token using `SecureStore`
+  //       // In the example, we'll use a dummy token
+
+  //       dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+  //     },
+  //     signOut: () => dispatch({type: 'SIGN_OUT'}),
+  //     signUp: async data => {
+  //       // In a production app, we need to send user data to server and get a token
+  //       // We will also need to handle errors if sign up failed
+  //       // After getting token, we need to persist the token using `SecureStore`
+  //       // In the example, we'll use a dummy token
+
+  //       dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+  //     },
+  //   }),
+  //   [],
+  // );
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-        <Tab.Screen name="Floatlist" component={FlatLists} />
+        <Tab.Screen name="SignIn" component={SignIn} />
+        <Tab.Screen name="SignUp" component={SignUp} />
+        <Tab.Screen name="Floatlist" component={FlastList} />
+        <Tab.Screen name="AlBum" component={AlBum} />
       </Tab.Navigator>
     </NavigationContainer>
-    // // <SafeAreaView style={styles.container}>
-    // //   <FlatList
-    // //     ListHeaderComponent={headerComponent}
-    // //     data={DATA}
-    // //     renderItem={oneUser}
-    // //     ListEmptyComponent={<Text>Danh sách rỗng</Text>}
-    // //   />
-    //   {/* <Icon name="rocket" size={30} color="#900" />; */}
-    // </SafeAreaView>
+    // <AuthContext.Provider value={authContext}>
+    //   <Stack.Navigator>
+    //     {state.userToken == null ? (
+    //       <Stack.Screen name="SignIn" component={SignIn} />
+    //     ) : (
+    //       <Stack.Screen name="Home" component={FlastList} />
+    //     )}
+    //   </Stack.Navigator>
+    // </AuthContext.Provider>
   );
 }
 
