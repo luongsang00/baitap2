@@ -1,11 +1,20 @@
 import * as React from 'react';
-import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  SafeAreaView,
+  Button,
+} from 'react-native';
 import Icons from 'react-native-vector-icons/AntDesign';
 import {useEffect, useState} from 'react';
 const status = {active: 'checksquareo', inactive: 'closecircleo'};
 const gender = {male: 'man', female: 'woman'};
+import {AuthContext} from './util';
 const FlastList = () => {
   const [users, setUser] = useState([]);
+  const {signOut} = React.useContext(AuthContext);
   //   function Data(props) {
   //     // return props;
   //     return {
@@ -95,6 +104,7 @@ const FlastList = () => {
         renderItem={oneUser}
         ListEmptyComponent={<Text>Danh sách rỗng</Text>}
       />
+      <Button title="Sign out" onPress={signOut} />
       {/* <Icon name="rocket" size={30} color="#900" />; */}
     </SafeAreaView>
   );

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-// const AuthContext = React.createContext();
+import {AuthContext} from './util';
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ const SignIn = () => {
   // const [users, setUser] = useState([]);
   const [emails, setEmail] = useState('');
   const [passwords, setPassword] = useState('');
-  // const {signIn} = React.useContext(AuthContext);
+  const {signIn} = React.useContext(AuthContext);
   return (
     <View style={{flex: 1}}>
       <View style={{flex: 30}}>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10,
     width: '40%',
-    backgroundColor: '#0000ff',
+    backgroundColor: '#ff7f50',
     justifyContent: 'center',
   },
   textRegister: {

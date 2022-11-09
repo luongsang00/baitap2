@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-const AuthContext = React.createContext();
+import {AuthContext} from './util';
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ const SignUp = () => {
   const [addess, setAddress] = useState('');
   const [states, setStates] = useState('');
   const [phones, setPhones] = useState('');
-
+  const {signIn} = React.useContext(AuthContext);
   return (
     <View style={styles.container}>
       <View style={styles.top}>
@@ -54,8 +54,7 @@ const SignUp = () => {
         <View style={styles.midToch}>
           <TouchableHighlight
             style={styles.toch}
-            // onPress={() => SignIn({addess, states, phones})}
-          >
+            onPress={() => signIn({addess, states, phones})}>
             <Text style={styles.textRegister}>Register</Text>
           </TouchableHighlight>
           {/* <Button title="Register" color={'#0000ff'} borderRadius={'10'} /> */}
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10,
     width: '40%',
-    backgroundColor: '#0000ff',
+    backgroundColor: '#ff7f50',
     justifyContent: 'center',
   },
   textRegister: {
