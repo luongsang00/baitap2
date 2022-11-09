@@ -15,31 +15,12 @@ const SignIn = () => {
   // const {signIn} = React.useContext(AuthContext);
   return (
     <View style={{flex: 1}}>
-      <View
-        style={{
-          //   backgroundColor: '#8a2be2',
-          flex: 30,
-          //   alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            backgroundColor: '#ff7f50',
-            textAlign: 'center',
-            height: 60,
-            paddingVertical: 10,
-            fontSize: 30,
-            color: '#fffaf0',
-          }}>
-          Sign in
-        </Text>
+      <View style={{flex: 30}}>
+        <Text style={styles.texttop}>Sign in</Text>
       </View>
       <View style={{flex: 60}}>
-        <View
-          style={{
-            marginVertical: 10,
-          }}>
+        <View style={{marginVertical: 10}}>
           <Text style={styles.text}>Your email</Text>
-
           <TextInput
             placeholderTextColor={'#a9a9a9'}
             placeholder="example@gmail.com"
@@ -61,14 +42,15 @@ const SignIn = () => {
             onChangeText={setPassword}
             style={styles.input}
             keyboardType="numbers-and-punctuation"
-            secureTextEntry
+            secureTextEntry={true}
           />
         </View>
         <View style={styles.midToch}>
           <TouchableHighlight
             style={styles.toch}
-            // onPress={() => signIn({emails, passwords})}
-            onPress={() => alert(emails + passwords)}>
+            onPress={() => signIn({emails, passwords})}
+            // onPress={() => alert(emails + passwords)}
+          >
             <Text style={styles.textRegister}>SignIn</Text>
           </TouchableHighlight>
           {/* <Button title="Register" color={'#0000ff'} borderRadius={'10'} /> */}
@@ -124,5 +106,13 @@ const styles = StyleSheet.create({
   textRegister: {
     textAlign: 'center',
     fontSize: 20,
+  },
+  texttop: {
+    backgroundColor: '#ff7f50',
+    textAlign: 'center',
+    height: 60,
+    paddingVertical: 10,
+    fontSize: 30,
+    color: '#fffaf0',
   },
 });

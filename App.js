@@ -1,141 +1,65 @@
 import * as React from 'react';
-import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
-import Icons from 'react-native-vector-icons/AntDesign';
+import {StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Iconn from 'react-native-vector-icons/FontAwesome';
 import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useEffect, useState} from 'react';
 import {SignIn, SignUp, FlastList, AlBum} from './screens';
 const AuthContext = React.createContext();
-
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 // const status = {active: 'checksquareo'};
 
-const Tab = createBottomTabNavigator();
-export default function App() {
-  // const [state, dispatch] = React.useReducer(
-  //   (prevState, action) => {
-  //     switch (action.type) {
-  //       case 'RESTORE_TOKEN':
-  //         return {
-  //           ...prevState,
-  //           userToken: action.token,
-  //           isLoading: false,
-  //         };
-  //       case 'SIGN_IN':
-  //         return {
-  //           ...prevState,
-  //           isSignout: false,
-  //           userToken: action.token,
-  //         };
-  //       case 'SIGN_OUT':
-  //         return {
-  //           ...prevState,
-  //           isSignout: true,
-  //           userToken: null,
-  //         };
-  //     }
-  //   },
-  //   {
-  //     isLoading: true,
-  //     isSignout: false,
-  //     userToken: null,
-  //   },
-  // );
-  // React.useEffect(() => {
-  //   // Fetch the token from storage then navigate to our appropriate place
-  //   const bootstrapAsync = async () => {
-  //     let userToken;
-
-  //     try {
-  //       userToken = await SecureStore.getItemAsync('userToken');
-  //     } catch (e) {
-  //       // Restoring token failed
-  //     }
-
-  //     // After restoring token, we may need to validate it in production apps
-
-  //     // This will switch to the App screen or Auth screen and this loading
-  //     // screen will be unmounted and thrown away.
-  //     dispatch({type: 'RESTORE_TOKEN', token: userToken});
-  //   };
-
-  //   bootstrapAsync();
-  // }, []);
-
-  // const authContext = React.useMemo(
-  //   () => ({
-  //     signIn: async data => {
-  //       // In a production app, we need to send some data (usually username, password) to server and get a token
-  //       // We will also need to handle errors if sign in failed
-  //       // After getting token, we need to persist the token using `SecureStore`
-  //       // In the example, we'll use a dummy token
-
-  //       dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
-  //     },
-  //     signOut: () => dispatch({type: 'SIGN_OUT'}),
-  //     signUp: async data => {
-  //       // In a production app, we need to send user data to server and get a token
-  //       // We will also need to handle errors if sign up failed
-  //       // After getting token, we need to persist the token using `SecureStore`
-  //       // In the example, we'll use a dummy token
-
-  //       dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
-  //     },
-  //   }),
-  //   [],
-  // );
+const Tab = createMaterialBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
+export default function App({Navigator}) {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="SignIn" component={SignIn} />
-        <Tab.Screen name="SignUp" component={SignUp} />
-        <Tab.Screen name="Floatlist" component={FlastList} />
-        <Tab.Screen name="AlBum" component={AlBum} />
+      <Tab.Navigator
+        initialRouteName="Feed"
+        activeColor="#e91e63"
+        barStyle={{backgroundColor: 'tomato'}}>
+        <Tab.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{
+            tabBarLabel: 'SignIn',
+            tabBarIcon: ({color}) => (
+              <Icon name="login" color={color} size={24} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{
+            tabBarLabel: 'SignIn',
+            tabBarIcon: ({color}) => (
+              <Iconn name="registered" color={color} size={24} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Floatlist"
+          component={FlastList}
+          options={{
+            tabBarLabel: 'SignIn',
+            tabBarIcon: ({color}) => (
+              <Icon name="home" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="AlBum"
+          component={AlBum}
+          options={{
+            tabBarLabel: 'SignIn',
+            tabBarIcon: ({color}) => (
+              <Icon name="retweet" color={color} size={26} />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
-    // <AuthContext.Provider value={authContext}>
-    //   <Stack.Navigator>
-    //     {state.userToken == null ? (
-    //       <Stack.Screen name="SignIn" component={SignIn} />
-    //     ) : (
-    //       <Stack.Screen name="Home" component={FlastList} />
-    //     )}
-    //   </Stack.Navigator>
-    // </AuthContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  userContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  user: {
-    borderWidth: 1,
-    borderColor: '#f0f8ff',
-    marginTop: 20,
-  },
-  text: {
-    justifyContent: 'center',
-    marginHorizontal: 10,
-    marginVertical: 5,
-    color: '#ffefd5',
-  },
-  icon: {
-    marginLeft: 5,
-    marginVertical: 2,
-    color: '#ff6347',
-  },
-  conten: {
-    textAlign: 'center',
-    fontSize: 30,
-    marginVertical: 10,
-    color: '#ffa07a',
-  },
-});
